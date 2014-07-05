@@ -1,5 +1,8 @@
 package com.stratos.beautifulinfinittextualexperiment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -9,19 +12,46 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.os.Build;
 
 public class ListActivity extends Activity {
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	
+	private ListView mainListView;
+	private ArrayAdapter<String> listAdapter;
+	
+	public void onCreate(Bundle savedInstanceState) 
+	{
+		super.onCreate (savedInstanceState);
 		setContentView(R.layout.activity_list);
-
-//		if (savedInstanceState == null) {
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.container, new PlaceholderFragment()).commit();
-//		}
+		mainListView = (ListView) findViewById(R.id.listView1);
+		String[] bails = new String[] { "Bails", "Jeej", "Suus", "Squalala", "( ͡° ͜ʖ ͡°)", "Loulou"};
+		ArrayList<String> bailsList = new ArrayList<String>();
+		bailsList.addAll(Arrays.asList(bails));
+		
+		listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, bailsList);
+		listAdapter.add("uidfg");
+		listAdapter.add("sdfgf");
+		listAdapter.add("azesw");
+		listAdapter.add("ntyyhnb");
+		listAdapter.add("dsfgnbhn");
+		listAdapter.add("dsfvd");
+		listAdapter.add("cvbgtrf");
+		listAdapter.add("sfbxbf");
+		listAdapter.add("sgfbgr");
+		listAdapter.add("rgbffgbv");
+		listAdapter.add("fgbhthbn");
+		listAdapter.add("erfdv");
+		listAdapter.add("sdfvfre");
+		listAdapter.add("fdbgfb");
+		listAdapter.add("xcvdcbs");
+		listAdapter.add("rzbngf");
+		listAdapter.add("sdfdfb");
+		mainListView.setAdapter(listAdapter);
+		
+		mainListView.setSelection(listAdapter.getCount() -1);
 	}
 
 	@Override
@@ -43,22 +73,5 @@ public class ListActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-//	/**
-//	 * A placeholder fragment containing a simple view.
-//	 */
-//	public static class PlaceholderFragment extends Fragment {
-//
-//		public PlaceholderFragment() {
-//		}
-//
-//		@Override
-//		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//				Bundle savedInstanceState) {
-//			View rootView = inflater.inflate(R.layout.fragment_list, container,
-//					false);
-//			return rootView;
-//		}
-//	}
 
 }

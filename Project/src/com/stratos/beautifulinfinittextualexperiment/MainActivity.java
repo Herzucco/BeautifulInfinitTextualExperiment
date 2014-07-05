@@ -101,7 +101,6 @@ public class MainActivity extends Activity {
     public class TestTask extends android.os.AsyncTask<String, Void, Boolean> {
 		@Override
 		protected void onPostExecute(Boolean result) {
-			Toast.makeText(MainActivity.this, "TOAST AU " + result, Toast.LENGTH_SHORT).show();
 			intent = new Intent (context, ListActivity.class);
 			startActivity(intent);
 		}
