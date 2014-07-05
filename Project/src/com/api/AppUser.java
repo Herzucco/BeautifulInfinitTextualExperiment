@@ -13,10 +13,13 @@ public class AppUser {
 		return user;
 	}
 	
-	public static void save(Editor editor){
-		editor.putString("name", getInstance().getName());
-		editor.putString("password", getInstance().getPassword());
-		editor.commit();
+	public static void save(SharedPreferences preferences){
+		if(load(preferences) == null){
+			Editor editor = preferences.edit();
+			editor.putString("name", getInstance().getName());
+			editor.putString("password", getInstance().getPassword());
+			editor.commit();
+		}
 	}
 	
 	public static User load(SharedPreferences preferences){
@@ -31,7 +34,7 @@ public class AppUser {
 		return null;
 	}
 	
-	private static class User {
+	public static class User {
 		private String name;
 		private String password;
 		
