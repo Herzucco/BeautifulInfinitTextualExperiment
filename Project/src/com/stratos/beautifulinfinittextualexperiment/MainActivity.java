@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(Boolean result) {
 			intent = new Intent (context, ListActivity.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
 		}
 
 		@Override
