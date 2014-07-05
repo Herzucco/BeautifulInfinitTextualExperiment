@@ -46,6 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
                 android:ems="10" >
                 <requestFocus />
             </EditText>
@@ -69,6 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="200dp"
                	android:inputType="textPassword"
+               	android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:ems="10" >
                 <requestFocus />
             </EditText>

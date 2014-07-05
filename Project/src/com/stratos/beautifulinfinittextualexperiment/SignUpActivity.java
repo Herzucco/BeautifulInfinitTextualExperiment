@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,8 +33,14 @@ public class SignUpActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up);
 		buttonClick();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 	}
 
+	public void onBackPressed() {
+	    super.onBackPressed();
+		overridePendingTransition(R.anim.swipe_right_in, R.anim.swipe_right_out);
+	}
+	
     public void buttonClick()
     {
     	usernameField = (EditText) findViewById(R.id.editText1);

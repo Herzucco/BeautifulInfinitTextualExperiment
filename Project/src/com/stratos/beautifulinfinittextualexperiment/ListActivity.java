@@ -61,6 +61,11 @@ public class ListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.list, menu);
 		return true;
 	}
+	
+	public void onBackPressed() {
+	    super.onBackPressed();
+		overridePendingTransition(R.anim.swipe_left_in, R.anim.swipe_left_out);
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,7 +42,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     	buttonClick();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+    
+	public void onBackPressed() {
+	    super.onBackPressed();
+		overridePendingTransition(R.anim.swipe_left_in, R.anim.swipe_left_out);
+	}
     
     public void buttonClick()
     {
@@ -79,7 +86,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				intent = new Intent (context, SignUpActivity.class);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
+				overridePendingTransition(R.anim.swipe_left_in, R.anim.swipe_left_out);
 			}
 		});
     }
@@ -126,7 +133,7 @@ public class MainActivity extends Activity {
 			System.out.println(ConnectionService.connect(username, password));
 			intent = new Intent (context, ListActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
+			overridePendingTransition(R.anim.swipe_left_in, R.anim.swipe_left_out);
 			// TODO Auto-generated method stub
 			return null;
 		}
