@@ -1,8 +1,13 @@
 package com.stratos.beautifulinfinittextualexperiment;
 
+import com.api.MessageService;
+import com.api.SignUpService;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,7 +27,12 @@ public class MainActivity extends Activity {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-        }
+        } 
+		SharedPreferences prefs = getSharedPreferences(getApplicationInfo().name, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		
+        AskConnectTask task = new AskConnectTask();
+		task.execute();
     }
 
 
@@ -61,5 +71,26 @@ public class MainActivity extends Activity {
             return rootView;
         }
     }
-
+    
+    private class AskConnectTask extends
+		android.os.AsyncTask<String, Void, Boolean> {
+	
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected Boolean doInBackground(String... params) {
+			MessageService.send("test");
+			return false;
+			
+		}
+		
+		@Override	
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+		}
+	
+	}
 }
