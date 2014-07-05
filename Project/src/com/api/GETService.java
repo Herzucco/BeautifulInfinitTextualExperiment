@@ -10,6 +10,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 public class GETService {
 	public static String get(String baseURL, String arg){
 		String builtURL = baseURL+'/'+arg;
@@ -23,6 +25,7 @@ public class GETService {
 	
 	public static String get(String baseURL, String arg1, String arg2, String arg3){
 		String builtURL = baseURL+'/'+arg1+'/'+arg2+'/'+arg3;
+		Log.i("[GET 3params]", builtURL);
 		return send(builtURL);
 	}
 
@@ -46,6 +49,7 @@ public class GETService {
 			e.printStackTrace();
 		}
 		
+		Log.i("[GET send - fail]", "failed");
 		return null;
 	}
 	// convert InputStream to String
