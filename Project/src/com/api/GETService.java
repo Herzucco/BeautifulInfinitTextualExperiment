@@ -20,6 +20,7 @@ public class GETService {
 	
 	public static String get(String baseURL, String arg1, String arg2){
 		String builtURL = baseURL+'/'+arg1+'/'+arg2;
+		Log.i("[GET 2params]", builtURL);
 		return send(builtURL);
 	}
 	
@@ -43,10 +44,8 @@ public class GETService {
 			}else{
 				return contentStr;
 			}
-		}catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		}catch (Exception e){
+			Log.i("get failed", e.toString());
 		}
 		
 		Log.i("[GET send - fail]", "failed");

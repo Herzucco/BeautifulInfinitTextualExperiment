@@ -8,6 +8,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.api.ConnectionService;
+import com.api.SignUpService;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,9 +29,12 @@ public class MainActivity extends Activity {
 	private EditText passwordField;
 	private TextView myTextView;
 	private Button sendButton;
+	private Button signUpButton;
 	private Button eraseButton;
 	private Intent intent;
 	private MainActivity context = this;
+	private String username;
+	private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class MainActivity extends Activity {
     	myTextView = (TextView) findViewById(R.id.textView2);
     	eraseButton = (Button) findViewById(R.id.button1);
     	sendButton = (Button) findViewById(R.id.button2);
+    	signUpButton = (Button) findViewById(R.id.button3);
 
     	
     	eraseButton.setOnClickListener(new OnClickListener() {
@@ -59,11 +66,22 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(MainActivity.this, "TOAST AU BEURRE!", Toast.LENGTH_SHORT).show();
-				TestTask task = new TestTask();
+				username = usernameField.getText().toString();
+				password = passwordField.getText().toString();
+				SignInTask task = new SignInTask();
 				task.execute();
 			}
-		});    
+		});
+    	
+    	signUpButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				intent = new Intent (context, SignUpActivity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
+			}
+		});
     }
     
     @Override
@@ -98,16 +116,17 @@ public class MainActivity extends Activity {
     	super.onDestroy();
     }
 
-    public class TestTask extends android.os.AsyncTask<String, Void, Boolean> {
+    public class SignInTask extends android.os.AsyncTask<String, Void, Boolean> {
 		@Override
 		protected void onPostExecute(Boolean result) {
-			intent = new Intent (context, ListActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.card_flip_left_in, R.anim.card_flip_left_out);
 		}
 
 		@Override
 		protected Boolean doInBackground(String... arg0) {
+			System.out.println(ConnectionService.connect(username, password));
+			intent = new Intent (context, ListActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
 			// TODO Auto-generated method stub
 			return null;
 		}
