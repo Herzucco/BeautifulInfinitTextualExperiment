@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 	private TextView myTextView;
 	private Button sendButton;
 	private Button signUpButton;
-	private Button eraseButton;
+//	private Button eraseButton;
 	private Intent intent;
 	private MainActivity context = this;
 	private String username;
@@ -65,19 +65,19 @@ public class MainActivity extends Activity {
     	usernameField = (EditText) findViewById(R.id.editText1);
     	passwordField = (EditText) findViewById(R.id.editText2);
     	myTextView = (TextView) findViewById(R.id.textView2);
-    	eraseButton = (Button) findViewById(R.id.button1);
+//    	eraseButton = (Button) findViewById(R.id.button1);
     	sendButton = (Button) findViewById(R.id.button2);
     	signUpButton = (Button) findViewById(R.id.button3);
 
     	
-    	eraseButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				usernameField.setText("");
-				passwordField.setText("");
-			}
-		});    
+//    	eraseButton.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				usernameField.setText("");
+//				passwordField.setText("");
+//			}
+//		});    
 
     	sendButton.setOnClickListener(new OnClickListener() {
 
