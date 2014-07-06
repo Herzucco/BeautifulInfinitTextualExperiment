@@ -20,10 +20,12 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 class CustomArrayAdapter extends ArrayAdapter<Message>
 {	
@@ -54,6 +56,8 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         holder.content = (TextView) convertView.findViewById(R.id.iStatus);
         holder.layout = (LinearLayout) convertView.findViewById(R.id.layoutListItem);
         holder.button = (Button) convertView.findViewById(R.id.iEdit);
+        holder.switcher = (ViewSwitcher) convertView.findViewById(R.id.my_switcher);
+        holder.edit = (EditText) convertView.findViewById(R.id.iEditText);
  
         holder.title.setText(list.get(position).getAuthor());
         holder.content.setText(list.get(position).getContent());
@@ -72,13 +76,19 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         holder.message = list.get(position);
         holder.message.view = holder;
         
+        if(!AppUser.getInstance().getName().equals(holder.message.getAuthor())){
+        	holder.button.setVisibility(View.INVISIBLE);
+        }
+        
         holder.button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Log.i("[click on layout]", holder.message.getContent());
-				EditTask task = new EditTask(holder.message);
-				task.execute();
+				holder.switcher.showNext();
+				holder.edit.requestFocus();
+				//EditTask task = new EditTask(holder.message);
+				//task.execute();
 			}
 		});    
         

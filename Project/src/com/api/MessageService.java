@@ -53,7 +53,7 @@ public class MessageService {
 					Log.i("[Adding msg]", msg.getContent());
 					messageList.add(msg);
 				}else if(msg.isFromBITE()){
-					Log.i("[Editing msg]", msg.getContent());
+					//Log.i("[Editing msg]", msg.getContent());
 					found.edition = msg.getContent();
 				}
 			} catch (Exception e) {
