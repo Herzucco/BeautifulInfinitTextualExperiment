@@ -13,8 +13,13 @@ import com.api.MessageService;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -36,14 +41,31 @@ public class MessagesActivity extends Activity {
 	private ListView mainListView;
 	private CustomArrayAdapter listAdapter;
 	private EditText sendMessage;
-	
+	private TextView welcomeText;
+	private Activity context;
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate (savedInstanceState);
+		
+		NotificationManager mNotificationManager =
+			    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.cancelAll();
+		
 		setContentView(R.layout.activity_messages);
 		mainListView = (ListView) findViewById(R.id.listView1);
 		sendMessage = (EditText) findViewById(R.id.sendMessage);
+		welcomeText = (TextView) findViewById(R.id.welcomeText);
 		
+		welcomeText.setText(AppUser.getInstance().getName());
+		
+		String hex = CustomArrayAdapter.toHex(AppUser.getInstance().getName());
+        hex = hex.substring(hex.length()-6);
+        
+        int color = CustomArrayAdapter.stringToColor("#"+hex);
+        
+        context = this;
+        
+        welcomeText.setBackgroundColor(color-4000000);
 		listAdapter = new CustomArrayAdapter(getApplicationContext(), R.id.tvItemTitle, MessageService.messageList);
 		mainListView.setAdapter(listAdapter);
 		
@@ -83,7 +105,6 @@ public class MessagesActivity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result){
 			sendMessage.setText("");
-			sendMessage.setCursorVisible(false);
 		}
     }  
 	
@@ -131,7 +152,12 @@ public class MessagesActivity extends Activity {
 			MessageService.parseString(MessageService.getContentStr());
 			Log.i("[oejfoejf]", String.valueOf(baseSize)+ " --- "+String.valueOf(listAdapter.getCount()));
 			if(baseSize < listAdapter.getCount()){
+				Message last = listAdapter.getItem(listAdapter.getCount() -1);
 				mainListView.setSelection(listAdapter.getCount() -1);
+				
+				if(AppUser.getInstance().getName().equals(last.getAuthor())){
+					sendNotification(last.getAuthor(), last.getContent());
+				}
 			}
 			for(int i = 0; i < listAdapter.getCount(); i++){
 				Message msg = listAdapter.getItem(i);
@@ -139,6 +165,30 @@ public class MessagesActivity extends Activity {
 					msg.edit();
 				}
 			}
+		}
+		
+		private void sendNotification(String author, String content){
+			NotificationCompat.Builder mBuilder =
+			        new NotificationCompat.Builder(context)
+			        .setSmallIcon(R.drawable.beautiful_launcher)
+			        .setContentTitle(author+" sent a message :")
+			        .setContentText(content);
+			
+			Intent resultIntent = new Intent(context, MessagesActivity.class);
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+			// Adds the back stack for the Intent (but not the Intent itself)
+			stackBuilder.addParentStack(MessagesActivity.class);
+			// Adds the Intent that starts the Activity to the top of the stack
+			stackBuilder.addNextIntent(resultIntent);
+			PendingIntent resultPendingIntent =
+			        stackBuilder.getPendingIntent(
+			            0,
+			            PendingIntent.FLAG_UPDATE_CURRENT
+			        );
+			mBuilder.setContentIntent(resultPendingIntent);
+			NotificationManager mNotificationManager =
+				    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			mNotificationManager.notify(0, mBuilder.build());
 		}
     }  
 	

@@ -64,7 +64,6 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         holder.content.setText(list.get(position).getContent());
         
         
-        //return the row view.
         String hex = toHex(list.get(position).getAuthor());
         hex = hex.substring(hex.length()-6);
         
@@ -96,6 +95,8 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
 					imm.showSoftInput(holder.edit, InputMethodManager.SHOW_IMPLICIT);
 				}
 				else{
+					InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(holder.edit.getWindowToken(), 0);
 					EditTask task = new EditTask(holder.message, holder.edit.getText().toString());
 					task.execute();
 				}
@@ -105,7 +106,7 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         return convertView;
     }
     
-    public String toHex(String arg) {
+    public static String toHex(String arg) {
         return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
     }
     
