@@ -17,6 +17,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.os.Build;
 
+import com.stratos.beautifulinfinittextualexperiment.CustomAdapter;
+
 public class ListActivity extends Activity {
 	
 	private ListView mainListView;
@@ -31,7 +33,7 @@ public class ListActivity extends Activity {
 		ArrayList<String> bailsList = new ArrayList<String>();
 		bailsList.addAll(Arrays.asList(bails));
 		
-		listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, bailsList);
+		listAdapter = new CustomAdapter(this, R.layout.simplerow, bailsList);
 		listAdapter.add("uidfg");
 		listAdapter.add("sdfgf");
 		listAdapter.add("azesw");

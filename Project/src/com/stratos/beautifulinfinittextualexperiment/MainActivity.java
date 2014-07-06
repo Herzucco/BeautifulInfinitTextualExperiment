@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
 			System.out.println(ConnectionService.connect(username, password));
 			intent = new Intent (context, ListActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.swipe_left_in, R.anim.swipe_left_out);
+			overridePendingTransition(R.anim.swipe_right_in, R.anim.swipe_right_out);
 			// TODO Auto-generated method stub
 			return null;
 		}
