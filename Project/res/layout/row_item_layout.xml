@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<?xml version="1.0" encoding="utf-8"?><LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal" 
     android:id="@+id/layoutListItem">
-    <CheckBox 
-        android:id="@+id/cbCheckListItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp" />
+<!--     <CheckBox  -->
+<!--         android:id="@+id/cbCheckListItem" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content"  -->
+<!--         android:layout_marginLeft="10dp" /> -->
+    <Button
+        android:id="@+id/iEdit"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_action_edit"
+        android:clickable="true" /> 
     <TextView
         android:id="@+id/tvItemTitle"
         android:layout_width="wrap_content"
@@ -21,10 +26,5 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:isScrollContainer="true" /> 
-    <Button
-        android:id="@+id/iEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit" 
-        android:clickable="true" /> 
+
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.stratos.beautifulinfinittextualexperiment;
 
 import com.api.SignUpService;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -27,6 +29,9 @@ public class SignUpActivity extends Activity {
 	private SignUpActivity context = this;
 	private String username;
 	private String password;
+    private int color1, color2, red1, red2, blue1, blue2, green1, green2;
+    View v;
+    ObjectAnimator anim;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,43 @@ public class SignUpActivity extends Activity {
 		setContentView(R.layout.activity_sign_up);
 		buttonClick();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        
+        color1 = 0xffffffff;
+        v = findViewById(R.id.textView1);
+        
+        anim = ObjectAnimator.ofInt(v, "backgroundColor", color1);
+        anim.setEvaluator(new ArgbEvaluator());
+        
+        anim.setDuration(1000);
+        
+        new Thread() {
+        	public void run(){
+        		while(true){
+        			try {
+        				Thread.sleep(1000);
+        			} catch (InterruptedException e) {
+        				e.printStackTrace();
+        			}
+        			SignUpActivity.this.runOnUiThread(new Runnable() {
+						public void run() {
+							red2 = (int)(Math.random() * 128 + 127);
+                            green2 = (int)(Math.random() * 128 + 127);
+                            blue2 = (int)(Math.random() * 128 + 127);
+                            color2 = 0xff << 24 | (red2 << 16) |
+                                    (green2 << 8) | blue2;
+
+                            // Update the color values
+                            anim.setIntValues(color1, color2);
+
+                            anim.start();
+
+                            // Order the colors
+                            color1 = color2;
+						}
+					});
+        		}
+        	}
+        }.start();
 	}
 
 	public void onBackPressed() {
