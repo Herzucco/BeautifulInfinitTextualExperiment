@@ -2,13 +2,33 @@ package com.api;
 
 import java.sql.Timestamp;
 
+import android.util.Log;
+
 import com.base64.Base64Coder;
 
 public class Message {
 	private String author;
 	private String content;
 	private String id;
+	private boolean fromBITE;
+	private boolean notDisplayed;
 	
+	public boolean isNotDisplayed() {
+		return notDisplayed;
+	}
+
+	public void setNotDisplayed(boolean notDisplayed) {
+		this.notDisplayed = notDisplayed;
+	}
+
+	public boolean isFromBITE() {
+		return fromBITE;
+	}
+
+	public void setFromBITE(boolean fromBITE) {
+		this.fromBITE = fromBITE;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -16,6 +36,7 @@ public class Message {
 	public Message(String author, String content) {
 		setAuthor(author);
 		setContent(content);
+		setNotDisplayed(true);
 		generateId();
 	}
 	public String getAuthor() {
@@ -34,19 +55,27 @@ public class Message {
 		String[] toParse = content.split("!!---!!");
 		content = toParse[0];
 		
-		if(toParse[1] != null){
+		if(toParse.length > 1){
 			id = toParse[1];
+			Log.i("[Id generation]", id);
+			setFromBITE(true);
 		}else{
-			java.util.Date date= new java.util.Date();
-			String time = new Timestamp(date.getTime()).toString();
-			id = time + AppUser.getInstance().getName();
+			setFromBITE(false);
 		}
 	}
 	public void send(){
+		if(id == null){
+			java.util.Date date= new java.util.Date();
+			Timestamp tmsp = new Timestamp(date.getTime());
+			id = tmsp.toString()+getAuthor();
+		}
 		MessageService.send(Base64Coder.encodeString(content+"!!---!!"+id));
 	}
 	public void edit(String newContent){
 		//edit ui
 		setContent(newContent);
+	}
+	public String getFormatedContent(){
+		return getAuthor() + " : "+ getContent();
 	}
 }

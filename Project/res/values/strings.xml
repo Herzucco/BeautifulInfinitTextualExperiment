@@ -7,5 +7,6 @@
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_card_flip">CardFlipActivity</string>
+    <string name="title_activity_messages">MessagesActivity</string>
 
 </resources>
