@@ -30,8 +30,6 @@
             android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
-            android:name="com.stratos.beautifulinfinittextualexperiment.CardFlipActivity"
-            android:label="@string/title_activity_card_flip" >
             android:name="com.stratos.beautifulinfinittextualexperiment.MessagesActivity"
             android:label="@string/title_activity_messages" >
         </activity>
