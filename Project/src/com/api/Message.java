@@ -57,7 +57,7 @@ public class Message {
 		
 		if(toParse.length > 1){
 			id = toParse[1];
-			Log.i("[Id generation]", id);
+			//Log.i("[Id generation]", id);
 			setFromBITE(true);
 		}else{
 			setFromBITE(false);

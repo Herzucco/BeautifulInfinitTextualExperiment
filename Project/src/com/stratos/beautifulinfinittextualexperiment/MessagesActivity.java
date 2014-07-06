@@ -34,7 +34,7 @@ import android.os.Build;
 public class MessagesActivity extends Activity {
 	
 	private ListView mainListView;
-	private ArrayAdapter<String> listAdapter;
+	private CustomArrayAdapter listAdapter;
 	private EditText sendMessage;
 	
 	public void onCreate(Bundle savedInstanceState) 
@@ -44,7 +44,7 @@ public class MessagesActivity extends Activity {
 		mainListView = (ListView) findViewById(R.id.listView1);
 		sendMessage = (EditText) findViewById(R.id.sendMessage);
 		
-		listAdapter = MessageService.displayableList;
+		listAdapter = new CustomArrayAdapter(getApplicationContext(), R.id.tvItemTitle, MessageService.messageList);
 		mainListView.setAdapter(listAdapter);
 		
 		mainListView.setSelection(listAdapter.getCount() -1);
@@ -122,13 +122,7 @@ public class MessagesActivity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result){
 			int baseSize = listAdapter.getCount();
-			for(int i = listAdapter.getCount(); i < MessageService.messageList.size(); i++){
-				Message msg = MessageService.messageList.get(i);
-				if(msg.isFromBITE() && msg.isNotDisplayed()){
-					listAdapter.add(msg.getFormatedContent());
-					msg.setNotDisplayed(false);
-				}
-			}
+			MessageService.parseString(MessageService.getContentStr());
 			if(baseSize < listAdapter.getCount()){
 				mainListView.setSelection(listAdapter.getCount() -1);
 			}
