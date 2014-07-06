@@ -155,7 +155,7 @@ public class MessagesActivity extends Activity {
 				Message last = listAdapter.getItem(listAdapter.getCount() -1);
 				mainListView.setSelection(listAdapter.getCount() -1);
 				
-				if(AppUser.getInstance().getName().equals(last.getAuthor())){
+				if(!AppUser.getInstance().getName().equals(last.getAuthor())){
 					sendNotification(last.getAuthor(), last.getContent());
 				}
 			}
