@@ -20,7 +20,7 @@ public class MessageService {
 		String name = AppUser.getInstance().getName();
 		String password = AppUser.getInstance().getPassword();
 		String contentStr = GETService.get(webserviceURL, name, password, message);
-		Log.i("[Message Send]", contentStr);
+		//Log.i("[Message Send]", contentStr);
 		if(contentStr != null){
 			return true;
 		}
@@ -52,6 +52,9 @@ public class MessageService {
 				if(found == null && msg.isFromBITE()){
 					Log.i("[Adding msg]", msg.getContent());
 					messageList.add(msg);
+				}else if(msg.isFromBITE()){
+					Log.i("[Editing msg]", msg.getContent());
+					found.edition = msg.getContent();
 				}
 			} catch (Exception e) {
 			}

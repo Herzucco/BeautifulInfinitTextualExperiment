@@ -113,9 +113,11 @@ public class MessagesActivity extends Activity {
 	}
 	
 	public class GetMessagesTask extends android.os.AsyncTask<String, Void, Boolean> {
+		int baseSize;
 		@Override
 		protected void onPreExecute() {
 			//todo : add spinning
+			baseSize = listAdapter.getCount();
 		}
 
 		@Override
@@ -126,10 +128,16 @@ public class MessagesActivity extends Activity {
     	
 		@Override
 		protected void onPostExecute(Boolean result){
-			int baseSize = listAdapter.getCount();
 			MessageService.parseString(MessageService.getContentStr());
+			Log.i("[oejfoejf]", String.valueOf(baseSize)+ " --- "+String.valueOf(listAdapter.getCount()));
 			if(baseSize < listAdapter.getCount()){
 				mainListView.setSelection(listAdapter.getCount() -1);
+			}
+			for(int i = 0; i < listAdapter.getCount(); i++){
+				Message msg = listAdapter.getItem(i);
+				if(msg.edition != null){
+					msg.edit();
+				}
 			}
 		}
     }  

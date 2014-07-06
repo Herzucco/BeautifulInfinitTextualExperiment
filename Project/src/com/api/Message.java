@@ -5,21 +5,16 @@ import java.sql.Timestamp;
 import android.util.Log;
 
 import com.base64.Base64Coder;
+import com.stratos.beautifulinfinittextualexperiment.*;
 
 public class Message {
 	private String author;
 	private String content;
 	private String id;
 	private boolean fromBITE;
-	private boolean notDisplayed;
 	
-	public boolean isNotDisplayed() {
-		return notDisplayed;
-	}
-
-	public void setNotDisplayed(boolean notDisplayed) {
-		this.notDisplayed = notDisplayed;
-	}
+	public String edition;
+	public ViewHolder view;
 
 	public boolean isFromBITE() {
 		return fromBITE;
@@ -36,7 +31,6 @@ public class Message {
 	public Message(String author, String content) {
 		setAuthor(author);
 		setContent(content);
-		setNotDisplayed(true);
 		generateId();
 	}
 	public String getAuthor() {
@@ -71,9 +65,11 @@ public class Message {
 		}
 		MessageService.send(Base64Coder.encodeString(content+"!!---!!"+id));
 	}
-	public void edit(String newContent){
-		//edit ui
-		setContent(newContent);
+	public void edit(){
+		setContent(edition);
+		if(view != null){
+			view.content.setText(getContent());
+		}
 	}
 	public String getFormatedContent(){
 		return getAuthor() + " : "+ getContent();
