@@ -17,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +41,7 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
 		
     public View getView(final int position, View convertView, ViewGroup parent)
     {
-    	Context ctx = BeautifulInfinitTextualExperiment.getAppContext();
+    	final Context ctx = BeautifulInfinitTextualExperiment.getAppContext();
     	
         //creating the ViewHolder we defined earlier.
         final ViewHolder holder = new ViewHolder();
@@ -69,8 +70,8 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         
         int color = stringToColor("#"+hex);
         
-        Log.i("[samer]", hex);
-        Log.i("[samer]", String.valueOf(color));
+        Log.i("[painting]", hex);
+        Log.i("[painting]", String.valueOf(color));
         
         holder.layout.setBackgroundColor(color-4000000);
         holder.message = list.get(position);
@@ -85,10 +86,19 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
 			@Override
 			public void onClick(View v) {
 				Log.i("[click on layout]", holder.message.getContent());
+				holder.isEditing = !holder.isEditing;
 				holder.switcher.showNext();
-				holder.edit.requestFocus();
-				//EditTask task = new EditTask(holder.message);
-				//task.execute();
+				
+				if(holder.isEditing){
+					holder.edit.setText(holder.content.getText().toString());
+					holder.edit.requestFocus();
+					InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.showSoftInput(holder.edit, InputMethodManager.SHOW_IMPLICIT);
+				}
+				else{
+					EditTask task = new EditTask(holder.message, holder.edit.getText().toString());
+					task.execute();
+				}
 			}
 		});    
         
@@ -114,9 +124,11 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
     
     public class EditTask extends android.os.AsyncTask<String, Void, Boolean> {
     	Message message;
+    	String content;
     	
-    	public EditTask(Message msg){
+    	public EditTask(Message msg, String str){
     		message = msg;
+    		content = str;
     	}
 		@Override
 		protected void onPreExecute() {
@@ -125,14 +137,14 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
 
 		@Override
 		protected Boolean doInBackground(String... arg0) {
-			message.setContent("This is an edit");
+			message.setContent(content);
 			message.send();
 			return null;
 		}
     	
 		@Override
 		protected void onPostExecute(Boolean result){
-			message.edition = "This is an edit";
+			message.edition = content;
 			message.edit();
 		}
     }

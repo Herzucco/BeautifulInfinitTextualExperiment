@@ -21,5 +21,7 @@ public class ViewHolder
     public LinearLayout layout;
     public Message message;
     public Button button;
+    
+    public boolean isEditing = false;
 }
 
