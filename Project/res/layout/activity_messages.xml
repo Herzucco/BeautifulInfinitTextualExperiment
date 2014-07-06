@@ -13,6 +13,22 @@
         android:background="@drawable/background_pattern"
     	android:orientation="vertical"
 	    >
+	    
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:background="#FFFFFF"
+                android:padding="0dp"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="Chat" 
+            />
+	   
 	    <ListView
         android:id="@+id/listView1"
         android:layout_height="0dp"
