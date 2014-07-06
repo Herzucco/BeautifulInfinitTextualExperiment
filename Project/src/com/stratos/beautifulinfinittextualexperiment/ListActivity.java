@@ -27,7 +27,7 @@ public class ListActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate (savedInstanceState);
-		setContentView(R.layout.activity_list);
+		setContentView(R.layout.activity_messages);
 		mainListView = (ListView) findViewById(R.id.listView1);
 		String[] bails = new String[] { "Bails", "Jeej", "Suus", "Squalala", "( ͡° ͜ʖ ͡°)", "Loulou"};
 		ArrayList<String> bailsList = new ArrayList<String>();

@@ -24,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity extends Activity {
 	private String username;
 	private String password;
 	private SharedPreferences preferences;
+	private ProgressBar progressBar;
 	
 
     @Override
@@ -49,6 +51,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     	buttonClick();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.GONE);
     }
     
 	public void onBackPressed() {
@@ -83,6 +87,7 @@ public class MainActivity extends Activity {
 				password = passwordField.getText().toString();
 				SignInTask task = new SignInTask();
 				task.execute();
+				progressBar.setVisibility(View.VISIBLE);
 			}
 		});
     	
@@ -154,6 +159,7 @@ public class MainActivity extends Activity {
 			if(result){
 				intent = new Intent (context, MessagesActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.swipe_right_in, R.anim.swipe_right_out);
 				//overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
 			}
 		}

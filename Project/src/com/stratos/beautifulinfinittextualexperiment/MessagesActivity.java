@@ -87,6 +87,11 @@ public class MessagesActivity extends Activity {
 		}
     }  
 	
+	public void onBackPressed() {
+	    super.onBackPressed();
+		overridePendingTransition(R.anim.swipe_left_in, R.anim.swipe_left_out);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
