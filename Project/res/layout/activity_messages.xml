@@ -25,6 +25,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_weight="1"
 	        android:inputType="textAutoCorrect" 
+            android:fontFamily="sans-serif-light"
             android:imeOptions="actionSend"/>
 	</LinearLayout>
 
