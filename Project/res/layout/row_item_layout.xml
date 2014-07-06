@@ -19,6 +19,7 @@
         android:id="@+id/tvItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:text="item string" />
 	    <ViewSwitcher
 	        android:id="@+id/my_switcher"
@@ -30,6 +31,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:clickable="true"
+		        android:fontFamily="sans-serif-light"
 		        android:isScrollContainer="true" /> 
 	
 	        <EditText
