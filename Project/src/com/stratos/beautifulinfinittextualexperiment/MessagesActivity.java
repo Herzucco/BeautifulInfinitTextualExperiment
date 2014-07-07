@@ -89,14 +89,21 @@ public class MessagesActivity extends Activity {
 	}
 	
 	public class SendMessageTask extends android.os.AsyncTask<String, Void, Boolean> {
+		String text;
+		Message msg;
 		@Override
 		protected void onPreExecute() {
 			//todo : add spinning
+			text = sendMessage.getText().toString();
+			sendMessage.setText("");
+			msg = new Message(AppUser.getInstance().getName(), text);
+			MessageService.messageList.add(msg);
+			mainListView.setSelection(listAdapter.getCount() -1);
 		}
 
 		@Override
 		protected Boolean doInBackground(String... arg0) {
-			Message msg = new Message(AppUser.getInstance().getName(), sendMessage.getText().toString());
+			//Message msg = new Message(AppUser.getInstance().getName(), text);
 			Log.i("[Message sending]", msg.getFormatedContent());
 		    msg.send();
 		    return true;
@@ -104,7 +111,7 @@ public class MessagesActivity extends Activity {
     	
 		@Override
 		protected void onPostExecute(Boolean result){
-			sendMessage.setText("");
+			
 		}
     }  
 	
@@ -170,7 +177,7 @@ public class MessagesActivity extends Activity {
 		private void sendNotification(String author, String content){
 			NotificationCompat.Builder mBuilder =
 			        new NotificationCompat.Builder(context)
-			        .setSmallIcon(R.drawable.beautiful_launcher)
+			        .setSmallIcon(R.drawable.ic_notif)
 			        .setContentTitle(author+" sent a message :")
 			        .setLights(0xffff69b4, 300, 100)
 			        .setAutoCancel(true)
