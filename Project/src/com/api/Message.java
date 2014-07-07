@@ -46,7 +46,7 @@ public class Message {
 		this.content = content;
 	}
 	public void generateId(){
-		String[] toParse = content.split("!!---!!");
+		String[] toParse = content.split("!!----!!");
 		content = toParse[0];
 		
 		if(toParse.length > 1){
@@ -63,7 +63,7 @@ public class Message {
 			Timestamp tmsp = new Timestamp(date.getTime());
 			id = tmsp.toString()+getAuthor();
 		}
-		MessageService.send(Base64Coder.encodeString(content+"!!---!!"+id));
+		MessageService.send(Base64Coder.encodeString(content+"!!----!!"+id));
 	}
 	public void edit(){
 		setContent(edition);

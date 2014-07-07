@@ -201,9 +201,11 @@ public class MainActivity extends Activity {
             if(result){
                 intent = new Intent (context, MessagesActivity.class);
                 startActivity(intent);
+                progressBar.setVisibility(View.GONE);
                 overridePendingTransition(R.anim.swipe_right_in, R.anim.swipe_right_out);
                 //overridePendingTransition(R.anim.activity_switch, R.anim.activity_out);
             }
+            progressBar.setVisibility(View.GONE);
         }
     }  
     

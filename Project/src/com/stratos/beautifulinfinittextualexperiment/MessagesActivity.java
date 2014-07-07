@@ -172,6 +172,8 @@ public class MessagesActivity extends Activity {
 			        new NotificationCompat.Builder(context)
 			        .setSmallIcon(R.drawable.beautiful_launcher)
 			        .setContentTitle(author+" sent a message :")
+			        .setLights(0xffff69b4, 300, 100)
+			        .setAutoCancel(true)
 			        .setContentText(content);
 			
 			Intent resultIntent = new Intent(context, MessagesActivity.class);
