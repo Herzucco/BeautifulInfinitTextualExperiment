@@ -26,6 +26,7 @@ public class SignUpActivity extends Activity {
 	private EditText usernameField;
 	private EditText passwordField;
 	private Button sendButton;
+    private Intent intent;
 	private SignUpActivity context = this;
 	private String username;
 	private String password;
@@ -125,6 +126,9 @@ public class SignUpActivity extends Activity {
     public class SignUpTask extends android.os.AsyncTask<String, Void, Boolean> {
 		@Override
 		protected void onPostExecute(Boolean result) {
+            intent = new Intent (context, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.swipe_right_in, R.anim.swipe_right_out);
 		}
 
 		@Override
