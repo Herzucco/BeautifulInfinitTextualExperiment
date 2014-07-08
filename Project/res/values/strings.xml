@@ -7,5 +7,11 @@
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_messages">MessagesActivity</string>
-
+    <string name="connection_form">Formulaire de connexion</string>
+    <string name="signup_form">Formulaire d\'inscription</string>
+    <string name="usernam_field">Nom d\'utilisateur</string>
+    <string name="password_field">Mot de passe</string>
+    <string name="send_button">Envoyer</string>
+    <string name="signup_button">Inscription</string>
+    
 </resources>
