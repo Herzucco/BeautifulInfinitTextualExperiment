@@ -9,19 +9,24 @@
 <!--         android:layout_width="wrap_content" -->
 <!--         android:layout_height="wrap_content"  -->
 <!--         android:layout_marginLeft="10dp" /> -->
-    <Button
-        android:id="@+id/iEdit"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_action_edit"
-        android:clickable="true" /> 
-    <TextView
-        android:id="@+id/tvItemTitle"
+
+    <LinearLayout
+        android:id="@+id/relativeLayoutViewList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:layout_marginRight="10dp"
-        android:text="item string" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="100dp">
+        
+	    <TextView
+	        android:id="@+id/tvItemTitle"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:padding="10dp"
+	        android:gravity="center"
+	        android:layout_weight="5"
+	        android:fontFamily="sans-serif"
+	        android:text="item string"
+	        android:textColor="@android:color/black" />
 	    <ViewSwitcher
 	        android:id="@+id/my_switcher"
 	        android:layout_width="wrap_content"
@@ -31,14 +36,24 @@
 		        android:id="@+id/iStatus"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:maxWidth="150dp"
 		        android:clickable="true"
 		        android:fontFamily="sans-serif-light"
-		        android:paddingBottom="10dp"
-		        android:isScrollContainer="true" /> 
+		        android:padding="10dp"
+		        android:isScrollContainer="true"
+		        android:textColor="@android:color/background_dark" /> 
 	
 	        <EditText
 		        android:id="@+id/iEditText"
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent" /> 
 	    </ViewSwitcher>
+		
+	    <Button
+	        android:id="@+id/iEdit"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:background="@drawable/ic_action_edit"
+	        android:clickable="true" /> 
+	</LinearLayout>
 </LinearLayout>

@@ -12,11 +12,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +27,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -59,6 +63,7 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         holder.button = (Button) convertView.findViewById(R.id.iEdit);
         holder.switcher = (ViewSwitcher) convertView.findViewById(R.id.my_switcher);
         holder.edit = (EditText) convertView.findViewById(R.id.iEditText);
+        holder.llayout = (LinearLayout) convertView.findViewById(R.id.relativeLayoutViewList);
  
         holder.title.setText(list.get(position).getAuthor());
         holder.content.setText(list.get(position).getContent());
@@ -72,12 +77,23 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         Log.i("[painting]", hex);
         Log.i("[painting]", String.valueOf(color));
         
-        holder.layout.setBackgroundColor(color-4000000);
+        holder.content.setBackgroundColor(color-7000000);
+        holder.title.setBackgroundColor(color-7000500);
         holder.message = list.get(position);
         holder.message.view = holder;
         
         if(!AppUser.getInstance().getName().equals(holder.message.getAuthor())){
-        	holder.button.setVisibility(View.INVISIBLE);
+        	holder.button.setVisibility(View.GONE);
+        	
+//        	ViewGroup.MarginLayoutParams params = (MarginLayoutParams) holder.llayout.getLayoutParams();
+//        	params.rightMargin = -100;
+//        	holder.llayout.setLayoutParams(params);	
+        	
+        	LinearLayout.LayoutParams align = (LinearLayout.LayoutParams) holder.llayout.getLayoutParams();
+        	align.rightMargin = -100;
+        	holder.llayout.setLayoutParams(align);
+        }else{
+        	
         }
         
         holder.button.setOnClickListener(new OnClickListener() {

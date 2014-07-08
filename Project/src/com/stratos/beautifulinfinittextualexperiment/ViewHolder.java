@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
@@ -21,6 +22,7 @@ public class ViewHolder
     public LinearLayout layout;
     public Message message;
     public Button button;
+    public LinearLayout llayout;
     
     public boolean isEditing = false;
 }
