@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal" 
+    android:gravity="right"
     android:id="@+id/layoutListItem">
 <!--     <CheckBox  -->
 <!--         android:id="@+id/cbCheckListItem" -->
@@ -15,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="100dp">
+        android:layout_marginRight="0dp">
         
 	    <TextView
 	        android:id="@+id/tvItemTitle"

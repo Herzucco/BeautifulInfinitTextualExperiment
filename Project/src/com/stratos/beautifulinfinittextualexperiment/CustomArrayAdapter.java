@@ -89,9 +89,10 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
 //        	params.rightMargin = -100;
 //        	holder.llayout.setLayoutParams(params);	
         	
-        	LinearLayout.LayoutParams align = (LinearLayout.LayoutParams) holder.llayout.getLayoutParams();
-        	align.rightMargin = -100;
-        	holder.llayout.setLayoutParams(align);
+        	LinearLayout parentLayout = (LinearLayout) convertView.findViewById(R.id.layoutListItem);
+        	LinearLayout.LayoutParams align = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 50);
+        	align.gravity = Gravity.LEFT;
+        	parentLayout.setLayoutParams(align);
         }else{
         	
         }
