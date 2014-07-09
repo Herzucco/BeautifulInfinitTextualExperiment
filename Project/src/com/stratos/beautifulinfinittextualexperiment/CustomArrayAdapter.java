@@ -84,17 +84,6 @@ class CustomArrayAdapter extends ArrayAdapter<Message>
         
         if(!AppUser.getInstance().getName().equals(holder.message.getAuthor())){
         	holder.button.setVisibility(View.GONE);
-        	
-//        	ViewGroup.MarginLayoutParams params = (MarginLayoutParams) holder.llayout.getLayoutParams();
-//        	params.rightMargin = -100;
-//        	holder.llayout.setLayoutParams(params);	
-        	
-        	LinearLayout parentLayout = (LinearLayout) convertView.findViewById(R.id.layoutListItem);
-        	LinearLayout.LayoutParams align = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 50);
-        	align.gravity = Gravity.LEFT;
-        	parentLayout.setLayoutParams(align);
-        }else{
-        	
         }
         
         holder.button.setOnClickListener(new OnClickListener() {

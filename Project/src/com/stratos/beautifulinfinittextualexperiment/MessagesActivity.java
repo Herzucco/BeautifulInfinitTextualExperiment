@@ -65,7 +65,7 @@ public class MessagesActivity extends Activity {
         
         context = this;
         
-        welcomeText.setBackgroundColor(color-4000000);
+        welcomeText.setBackgroundColor(color-7000500);
 		listAdapter = new CustomArrayAdapter(getApplicationContext(), R.id.tvItemTitle, MessageService.messageList);
 		mainListView.setAdapter(listAdapter);
 		
